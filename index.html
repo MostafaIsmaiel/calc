@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/dist/style1.css" />
+    <title>Calculator app</title>
+  </head>
+
+  <body class="style-1">
+    <button class="toggle-btn" id="aside-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <aside class="sidebar" id="history">
+      <h2>History</h2>
+      <button class="clear" id="clear">Clear History</button>
+    </aside>
+
+    <div class="container">
+      <header>
+        <h3>calc</h3>
+        <div class="theme">
+          <span>Theme</span>
+          <div class="toggle">
+            <div class="radio">
+              <input type="radio" name="theme" id="theme-1" value="1" checked />
+              <label for="theme-1">1</label>
+            </div>
+            <div class="radio">
+              <input type="radio" name="theme" id="theme-2" value="2" />
+              <label for="theme-2">2</label>
+            </div>
+            <div class="radio">
+              <input type="radio" name="theme" id="theme-3" value="3" />
+              <label for="theme-3">3</label>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="screen">
+        <div id="result"></div>
+        <div id="screen"></div>
+        <span class="left-span">
+          <div id="prev-num" class="prev-num"></div>
+          <div id="operator" class="operator"></div>
+        </span>
+        <span class="right-span" id="last-result"></span>
+      </div>
+      <section id="enter" class="entries">
+        <!-- Digits -->
+        <button class="btn digit" value="1">1</button>
+        <button class="btn digit" value="2">2</button>
+        <button class="btn digit" value="3">3</button>
+        <button class="btn digit" value="4">4</button>
+        <button class="btn digit" value="5">5</button>
+        <button class="btn digit" value="6">6</button>
+        <button class="btn digit" value="7">7</button>
+        <button class="btn digit" value="8">8</button>
+        <button class="btn digit" value="9">9</button>
+        <button class="btn digit" value="0">0</button>
+        <button id="del" class="btn custom-1 del">del</button>
+        <!-- operators -->
+        <button class="btn operators" value="+">+</button>
+        <button class="btn operators" value="-">-</button>
+        <button class="btn operators" value="*">x</button>
+        <button class="btn operators" value="/">/</button>
+        <!-- Dot -->
+        <button id="dot" class="btn" value=".">.</button>
+        <!-- Reset -->
+        <button id="reset" class="btn custom-1">reset</button>
+        <!-- Equal -->
+        <button id="equal" class="btn custom-2">=</button>
+      </section>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
