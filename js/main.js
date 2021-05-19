@@ -1,10 +1,7 @@
 // Change theme
 function changeTheme() {
   if (this.checked) {
-    $('link[rel="stylesheet"]').attr({
-      href: `css/dist/style${$(this).val()}.css`,
-      rel: "stylesheet",
-    });
+    $("body").removeAttr("class").addClass(this.value);
   }
 }
 
@@ -86,6 +83,52 @@ function formatMoney(number) {
   return new Intl.NumberFormat().format(number);
 }
 
+// Histories
+const localStorageHistories = JSON.parse(localStorage.getItem("histories"));
+
+let histories =
+  localStorage.getItem("histories") !== null ? localStorageHistories : [];
+
+// Update History
+
+// Add to local storage
+function addToLocalStorage(result) {
+  if (result != undefined) {
+    const history = {
+      id: generateID(),
+      screen: $("#screen").html(),
+      prevNum: $("#prev-num").html(),
+      operator: $("#operator").html(),
+      result: $("#result").html(),
+    };
+
+    histories.push(history);
+
+    updateLocalStorage();
+
+    addToHistory(history);
+  }
+}
+// Update local storage
+function updateLocalStorage() {
+  localStorage.setItem("histories", JSON.stringify(histories));
+}
+
+// Add to history
+function addToHistory(history) {
+  const item1 = document.createElement("div");
+  const item2 = document.createElement("div");
+
+  item1.classList.add("history-screen");
+  item2.classList.add("history-result");
+
+  item1.innerHTML = `${history.screen} ${history.operator} ${history.prevNum}`;
+  item2.innerHTML = `${history.result}`;
+
+  $("#history").append(item1);
+  $("#history").append(item2);
+}
+
 // Get result
 function getResult() {
   let screen = $("#screen").html();
@@ -99,16 +142,12 @@ function getResult() {
 
   let result = eval(prevNum + operator + screen);
 
-  // Add to history
-  let history = `<div class="history-screen">${prevNum} ${operator}  ${screen}
-  </div>
-  <div class="history-result">${formatMoney(result)}</div>`;
-
   if (result != undefined) {
     return (
       $("#last-result").html(prevNum + operator + screen),
       $("#history").append(history),
       $("#result").html(formatMoney(result)),
+      addToLocalStorage(result),
       $("#screen").html(""),
       $("#prev-num").html(""),
       $("#operator").html("")
@@ -116,6 +155,10 @@ function getResult() {
   }
 }
 
+//  Generat random ID
+function generateID() {
+  return Math.floor(Math.random() * 100000000);
+}
 // Aside style
 function aside() {
   $("#history").toggleClass("transform");
@@ -124,9 +167,16 @@ function aside() {
 
 // Clear History
 function clear() {
+  localStorage.removeItem("histories");
   $("#history .history-result").remove();
   $("#history .history-screen").remove();
 }
+
+// init app
+function inint() {
+  histories.forEach(addToHistory);
+}
+inint();
 
 // Add click events
 $("input").on("change", changeTheme);
