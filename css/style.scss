@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
 
 /*Variables*/
+:root {
+  --border-radius: 5px;
+  --transition: transform 0.3s ease-in-out;
+}
 
 .style-1 {
   --main-background: hsl(222, 26%, 31%);
@@ -50,7 +54,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-
 }
 
 body {
@@ -62,8 +65,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  --border-radius: 5px;
-  --transition: transform 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+
 }
 
 
