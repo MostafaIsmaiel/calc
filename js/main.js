@@ -120,8 +120,8 @@ function addToHistory(history) {
   item1.innerHTML = `${history.screen} ${history.operator} ${history.prevNum}`;
   item2.innerHTML = `${history.result}`;
 
-  $("#history").append(item1);
-  $("#history").append(item2);
+  $("#history-list").append(item1);
+  $("#history-list").append(item2);
 }
 
 // Format number
@@ -156,7 +156,7 @@ function getResult() {
   if (result != undefined) {
     return (
       $("#last-result").html(resetNumberFormat(prevNum) + operator + screen),
-      $("#history").append(history),
+      $("#history-list").append(history),
       $("#result").html(result),
       addToLocalStorage(result),
       $("#screen").html(""),
