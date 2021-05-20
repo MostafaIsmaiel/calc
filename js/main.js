@@ -78,11 +78,6 @@ function addDot() {
   }
 }
 
-// Format number
-function formatMoney(number) {
-  return new Intl.NumberFormat().format(number);
-}
-
 // Histories
 const localStorageHistories = JSON.parse(localStorage.getItem("histories"));
 
@@ -129,24 +124,40 @@ function addToHistory(history) {
   $("#history").append(item2);
 }
 
+// Format number
+function formatNumber(number) {
+  return new Intl.NumberFormat().format(number);
+}
+
+// Reset number format
+function resetNumberFormat(number) {
+  number = number.split("");
+  number = number.filter((ele) => ele != ",");
+  return (number = number.join(""));
+}
+function go() {
+  let screen = $("#screen").html();
+  let operator = $("#operator").html();
+  let prevNum = $("#prev-num").html();
+
+  let result = eval(resetNumberFormat(prevNum) + operator + screen);
+}
+
 // Get result
 function getResult() {
   let screen = $("#screen").html();
   let operator = $("#operator").html();
-
-  // Reset number format
   let prevNum = $("#prev-num").html();
-  prevNum = prevNum.split("");
-  prevNum = prevNum.filter((ele) => ele != ",");
-  prevNum = prevNum.join("");
 
-  let result = eval(prevNum + operator + screen);
+  let result = eval(resetNumberFormat(prevNum) + operator + screen);
+  result =
+    result < 999999999999 ? formatNumber(result) : result.toExponential(2);
 
   if (result != undefined) {
     return (
-      $("#last-result").html(prevNum + operator + screen),
+      $("#last-result").html(resetNumberFormat(prevNum) + operator + screen),
       $("#history").append(history),
-      $("#result").html(formatMoney(result)),
+      $("#result").html(result),
       addToLocalStorage(result),
       $("#screen").html(""),
       $("#prev-num").html(""),
